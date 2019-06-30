@@ -3,6 +3,7 @@ package pl.lucky.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.lucky.model.Article;
@@ -11,15 +12,12 @@ import pl.lucky.model.Article;
 public class ArticleController {
 
     @PostMapping("/add")
-    public String addArticle(@RequestParam String title, @RequestParam String content, @RequestParam String tags, Model model) {
-
-        if (checkNotEmpty(title, content)) {
-            Article article = new Article(title, content, tags);
-            model.addAttribute("article",article);
+    public String addArticle(@ModelAttribute Article formArticle, Model model) {
+        if(checkNotEmpty(formArticle)) {
+            model.addAttribute("formArticle", formArticle);
             return "success";
-        }else {
+        } else
             return "redirect:sorry";
-        }
     }
 
     @GetMapping("/sorry")
@@ -27,9 +25,9 @@ public class ArticleController {
         return "errorMessage";
     }
 
-    private boolean checkNotEmpty(String title, String content) {
-        return (title != null && title.length() > 0)
-                && (content != null && content.length() > 0);
+    private boolean checkNotEmpty(Article article) {
+        return (article.getTitle()!=null && article.getTitle().length()>0)
+                && (article.getContent()!=null && article.getContent().length()>0);
     }
 
 }
