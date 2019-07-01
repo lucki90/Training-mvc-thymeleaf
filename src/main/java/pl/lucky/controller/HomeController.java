@@ -9,7 +9,7 @@ import pl.lucky.model.Article;
 public class HomeController {
 
 
-    @GetMapping("/")
+//    @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("helloMessage", "Hello Thymeleaf!");
         model.addAttribute("formArticle", new Article("Some title", "Content here...", "tag1, tag2,"));

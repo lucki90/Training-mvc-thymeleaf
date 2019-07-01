@@ -7,10 +7,10 @@
 </head>
 <body>
 <h1 th:text="${helloMessage}"></h1>
-<form th:action="@{/add}" method="post">
-    <p><input type="text" th:field="${formArticle.title}"></p>
-    <p><textarea th:field="${formArticle.content}"></textarea></p>
-    <p><input type="text" th:field="${formArticle.tags}" /></p>
+<form th:action="@{/add}" method="post" th:object="${formArticle}">
+    <p><input type="text" th:field="*{title}"></p>
+    <p><textarea th:field="*{content}"></textarea></p>
+    <p><input type="text" th:field="*{tags}" /></p>
     <p><input type="submit" value="Add" /></p>
 </form>
 </body>
